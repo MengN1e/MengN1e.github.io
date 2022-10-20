@@ -1,0 +1,269 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>数据清洗和绘图入门 | MengN1e の 小小世界</title><meta name="keywords" content="python,数据分析"><meta name="author" content="MengN1e"><meta name="copyright" content="MengN1e"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="数据清洗和准备离散化和分箱 需要切割不同的数据段。pd.cut 123456789101112131415161718data &#x3D; [1, 2, 3, 4, 5, 7, 8]bins &#x3D; [1 ,2 ,5 ,8]cats &#x3D; pd.cut(data,bins)print(cats)print(&quot;\n&quot;)# 显示出数据在盒子的哪一段？print(cats.codes)print(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据清洗和绘图入门">
+<meta property="og:url" content="https://mengn1e.github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/index.html">
+<meta property="og:site_name" content="MengN1e の 小小世界">
+<meta property="og:description" content="数据清洗和准备离散化和分箱 需要切割不同的数据段。pd.cut 123456789101112131415161718data &#x3D; [1, 2, 3, 4, 5, 7, 8]bins &#x3D; [1 ,2 ,5 ,8]cats &#x3D; pd.cut(data,bins)print(cats)print(&quot;\n&quot;)# 显示出数据在盒子的哪一段？print(cats.codes)print(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mengn1e.github.io/post-images/hbm-K5f37.jpg">
+<meta property="article:published_time" content="2022-10-20T09:25:45.000Z">
+<meta property="article:modified_time" content="2022-10-20T09:26:24.067Z">
+<meta property="article:author" content="MengN1e">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="数据分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mengn1e.github.io/post-images/hbm-K5f37.jpg"><link rel="shortcut icon" href="https://menge-bucket.oss-cn-beijing.aliyuncs.com/11/My_Photos/%E5%8D%83%E6%9D%9F%E5%A4%B4%E5%83%8F/0%20%284%29.jpg"><link rel="canonical" href="https://mengn1e.github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":true,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '数据清洗和绘图入门',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-10-20 17:26:24'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/mycss.css"><meta name="generator" content="Hexo 5.4.2"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><div id="web_bg"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://menge-bucket.oss-cn-beijing.aliyuncs.com/Note_img/my.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 归类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw far fa-smile"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-heart"></i><span> 打赏</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/post-images/hbm-K5f37.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">MengN1e の 小小世界</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 归类</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 娱乐</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/music/"><i class="fa-fw fas fa-music"></i><span> Music</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw far fa-smile"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/reward/"><i class="fa-fw fas fa-heart"></i><span> 打赏</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据清洗和绘图入门</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-20T09:25:45.000Z" title="发表于 2022-10-20 17:25:45">2022-10-20</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-10-20T09:26:24.067Z" title="更新于 2022-10-20 17:26:24">2022-10-20</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/python%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">python数据分析</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>5分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="数据清洗和绘图入门"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="数据清洗和准备"><a href="#数据清洗和准备" class="headerlink" title="数据清洗和准备"></a>数据清洗和准备</h1><h1 id="离散化和分箱"><a href="#离散化和分箱" class="headerlink" title="离散化和分箱"></a>离散化和分箱</h1><ol>
+<li><p>需要切割不同的数据段。pd.cut</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">data = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">8</span>]</span><br><span class="line">bins = [<span class="number">1</span> ,<span class="number">2</span> ,<span class="number">5</span> ,<span class="number">8</span>]</span><br><span class="line"></span><br><span class="line">cats = pd.cut(data,bins)</span><br><span class="line"><span class="built_in">print</span>(cats)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示出数据在盒子的哪一段？</span></span><br><span class="line"><span class="built_in">print</span>(cats.codes)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示分类区间</span></span><br><span class="line"><span class="built_in">print</span>(cats.categories)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;\n&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 显示数据段</span></span><br><span class="line"><span class="built_in">print</span>(cats.value_counts(cats))	</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">[NaN, (1.0, 2.0], (2.0, 5.0], (2.0, 5.0], (2.0, 5.0], (5.0, 8.0], (5.0, 8.0]]</span><br><span class="line">Categories (3, interval[int64, right]): [(1, 2] &lt; (2, 5] &lt; (5, 8]]</span><br><span class="line">[-1  0  1  1  1  2  2]</span><br><span class="line">IntervalIndex([(1, 2], (2, 5], (5, 8]], dtype=&#x27;interval[int64, right]&#x27;)</span><br><span class="line">(1, 2]    1</span><br><span class="line">(2, 5]    3</span><br><span class="line">(5, 8]    2</span><br><span class="line">dtype: int64</span><br></pre></td></tr></table></figure></li>
+<li><p>可以通过qcut获得等长的箱：precision=2的选项将十进制精度限制在两位（指的是分段的时候）</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># cut获得等长的</span></span><br><span class="line">data = <span class="built_in">range</span>(<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(data))</span><br><span class="line">cats = pd.cut(data,<span class="number">3</span>,precision=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(cats)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</span><br><span class="line">[(-0.0, 6.0], (-0.0, 6.0], (-0.0, 6.0], (-0.0, 6.0], (-0.0, 6.0], ..., (13.0, 19.0], (13.0, 19.0], (13.0, 19.0], (13.0, 19.0], (13.0, 19.0]]</span><br><span class="line">Length: 20</span><br><span class="line">Categories (3, interval[float64, right]): [(-0.0, 6.0] &lt; (6.0, 13.0] &lt; (13.0, 19.0]]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># qcut</span></span><br><span class="line">data = <span class="built_in">range</span>(<span class="number">20</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">list</span>(data))</span><br><span class="line">cats = pd.qcut(data,<span class="number">3</span>,precision=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(cats)</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">//</span><br><span class="line">[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]</span><br><span class="line">[(-1.0, 6.0], (-1.0, 6.0], (-1.0, 6.0], (-1.0, 6.0], (-1.0, 6.0], ..., (13.0, 19.0], (13.0, 19.0], (13.0, 19.0], (13.0, 19.0], (13.0, 19.0]]</span><br><span class="line">Length: 20</span><br><span class="line">Categories (3, interval[float64, right]): [(-1.0, 6.0] &lt; (6.0, 13.0] &lt; (13.0, 19.0]]</span><br></pre></td></tr></table></figure>
+
+<h1 id="检测和过滤异常值"><a href="#检测和过滤异常值" class="headerlink" title="检测和过滤异常值"></a>检测和过滤异常值</h1><ol>
+<li><p>灵活使用any和all⽤来过滤bool索引</p>
+<p><code>all和any 仅仅会判断0和非0 True和False</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>),index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="comment"># s = pd.Series([1, 2, 3, np.nan, None])</span></span><br><span class="line"><span class="comment">#  all和any 仅仅会判断0和1 Ture和false</span></span><br><span class="line"><span class="built_in">print</span>(df.<span class="built_in">all</span>(<span class="number">0</span>))</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">c  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line"><span class="number">0</span>    <span class="literal">False</span></span><br><span class="line"><span class="number">1</span>     <span class="literal">True</span></span><br><span class="line"><span class="number">2</span>     <span class="literal">True</span></span><br><span class="line"><span class="number">3</span>     <span class="literal">True</span></span><br><span class="line">dtype: <span class="built_in">bool</span></span><br></pre></td></tr></table></figure>
+
+<p>all(0)——列</p>
+<p>all(1)——行</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">data = pd.DataFrame(np.random.randn(<span class="number">1000</span>, <span class="number">4</span>))</span><br><span class="line">col = data[<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(col[np.<span class="built_in">abs</span>(col) &gt; <span class="number">3</span>])</span><br><span class="line"><span class="comment">#  要选出所有值⼤于3或⼩于-3的⾏，你可以对布尔值DataFrame使⽤any⽅法：</span></span><br><span class="line"><span class="built_in">print</span>(data[(np.<span class="built_in">abs</span>(data) &gt; <span class="number">3</span>).<span class="built_in">any</span>(<span class="number">1</span>)])：</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">//</span><br><span class="line"><span class="number">319</span>    <span class="number">3.303295</span></span><br><span class="line"><span class="number">387</span>   -<span class="number">3.085890</span></span><br><span class="line"><span class="number">952</span>   -<span class="number">3.161009</span></span><br><span class="line">Name: <span class="number">2</span>, dtype: float64</span><br><span class="line">        </span><br><span class="line">            <span class="number">0</span>         <span class="number">1</span>         <span class="number">2</span>         <span class="number">3</span></span><br><span class="line"><span class="number">107</span>  <span class="number">3.133777</span>  <span class="number">0.999826</span> -<span class="number">1.131444</span>  <span class="number">0.471213</span></span><br><span class="line"><span class="number">170</span>  <span class="number">3.201041</span>  <span class="number">1.331102</span>  <span class="number">0.841939</span>  <span class="number">2.088766</span></span><br><span class="line"><span class="number">319</span> -<span class="number">0.933900</span>  <span class="number">0.599506</span>  <span class="number">3.303295</span> -<span class="number">3.023445</span></span><br><span class="line"><span class="number">387</span> -<span class="number">0.483502</span> -<span class="number">0.124413</span> -<span class="number">3.085890</span> -<span class="number">0.761549</span></span><br><span class="line"><span class="number">505</span>  <span class="number">0.614210</span>  <span class="number">3.080073</span> -<span class="number">1.627996</span>  <span class="number">1.034018</span></span><br><span class="line"><span class="number">633</span> -<span class="number">3.259740</span> -<span class="number">1.494244</span> -<span class="number">0.111966</span> -<span class="number">0.359650</span></span><br><span class="line"><span class="number">771</span>  <span class="number">0.785776</span> -<span class="number">3.610443</span>  <span class="number">1.239399</span>  <span class="number">1.128048</span></span><br><span class="line"><span class="number">801</span>  <span class="number">1.547612</span>  <span class="number">3.039402</span>  <span class="number">0.102769</span> -<span class="number">2.795720</span></span><br><span class="line"><span class="number">853</span>  <span class="number">0.522063</span>  <span class="number">0.167094</span> -<span class="number">0.329888</span>  <span class="number">3.255779</span></span><br><span class="line"><span class="number">923</span> -<span class="number">0.251616</span>  <span class="number">0.193057</span>  <span class="number">0.476540</span> -<span class="number">3.004369</span></span><br><span class="line"><span class="number">952</span>  <span class="number">1.507127</span> -<span class="number">0.667296</span> -<span class="number">3.161009</span> -<span class="number">1.330215</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="置换和随机抽样"><a href="#置换和随机抽样" class="headerlink" title="置换和随机抽样"></a>置换和随机抽样</h1><ol>
+<li><p>​    要随机提取的样本可以⽤sample函数</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">df = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>),index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"></span><br><span class="line"><span class="comment">#随机取3⾏</span></span><br><span class="line"><span class="built_in">print</span>(df.sample(<span class="number">3</span>)) <span class="comment"># df.sample(n=3)是一样的</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#允许放回</span></span><br><span class="line">df = pd.DataFrame(np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>),index=[<span class="string">&#x27;a&#x27;</span>,<span class="string">&#x27;b&#x27;</span>,<span class="string">&#x27;c&#x27;</span>])</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="built_in">print</span>(df.sample(n=<span class="number">10</span>,replace=<span class="literal">True</span>))</span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">c  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line">   <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">c  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">c  <span class="number">8</span>  <span class="number">9</span>  <span class="number">10</span>  <span class="number">11</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br><span class="line">a  <span class="number">0</span>  <span class="number">1</span>   <span class="number">2</span>   <span class="number">3</span></span><br><span class="line">b  <span class="number">4</span>  <span class="number">5</span>   <span class="number">6</span>   <span class="number">7</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="字符串操作"><a href="#字符串操作" class="headerlink" title="字符串操作"></a>字符串操作</h1><h2 id="字符串对象方法"><a href="#字符串对象方法" class="headerlink" title="字符串对象方法"></a>字符串对象方法</h2><ol>
+<li>split、strip</li>
+<li>find、index   find是返回-1,index会抛出异常</li>
+<li>count、replace</li>
+<li>lower、upper</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># split分割 strip除去</span></span><br><span class="line">s = <span class="string">&#x27;a ,b ,xx &#x27;</span></span><br><span class="line">p = [ x.strip().upper() <span class="keyword">for</span> x <span class="keyword">in</span> s.split(<span class="string">&#x27;,&#x27;</span>) ]</span><br><span class="line"><span class="built_in">print</span>(p)</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> s.find(<span class="string">&#x27;a&#x27;</span>) != -<span class="number">1</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;found&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(s.count(<span class="string">&#x27;x&#x27;</span>)) <span class="comment"># 计数</span></span><br><span class="line"></span><br><span class="line">//</span><br><span class="line">[<span class="string">&#x27;A&#x27;</span>, <span class="string">&#x27;B&#x27;</span>, <span class="string">&#x27;XX&#x27;</span>]</span><br><span class="line">found</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="Pandas中的向量化字符串函数"><a href="#Pandas中的向量化字符串函数" class="headerlink" title="Pandas中的向量化字符串函数"></a>Pandas中的向量化字符串函数</h2><p>你可以使⽤data.map将字符串和有效的正则表达式方法（以 lambda或其他函数的⽅式传递）应⽤ 到每个值上，但是在 NA（null）值上会失败。为了解决这个问题，Series有面向数组 的⽅法⽤于跳 过NA值的字符串操作。这些方法通过Series的str 属性进行调用</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 我们可以通过str.contains来检查每个电⼦ 邮件地址是否含有&#x27;gmail&#x27;：</span></span><br><span class="line">data.<span class="built_in">str</span>.contains(<span class="string">&#x27;gmail&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ol>
+<h1 id="绘图和可视化"><a href="#绘图和可视化" class="headerlink" title="绘图和可视化"></a>绘图和可视化</h1><h2 id="安装matplotlib"><a href="#安装matplotlib" class="headerlink" title="安装matplotlib"></a>安装matplotlib</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install matplotlib --target=D:\My_Code\class_python\venv\Lib\site-packages </span><br></pre></td></tr></table></figure>
+
+<h2 id="matplotloib-API入门"><a href="#matplotloib-API入门" class="headerlink" title="matplotloib API入门"></a>matplotloib API入门</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">data = np.array([<span class="number">1</span>,<span class="number">20</span>,<span class="number">1</span>])</span><br><span class="line">plt.plot(data)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://menge-bucket.oss-cn-beijing.aliyuncs.com/Note_img/image-20221020170847443.png" alt="image-20221020170847443"></p>
+<h2 id="使用pandas和seaborn绘图"><a href="#使用pandas和seaborn绘图" class="headerlink" title="使用pandas和seaborn绘图"></a>使用pandas和seaborn绘图</h2><p><a target="_blank" rel="noopener" href="https://seaborn.pydata.org/">seaborn: statistical data visualization — seaborn 0.12.1 documentation (pydata.org)</a></p>
+<p><a target="_blank" rel="noopener" href="https://plotly.com/python/">https://plotly.com/python/</a></p>
+<ul>
+<li>尝试使用plotly</li>
+</ul>
+<ol>
+<li>安装</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install plotly --target=D:\My_Code\class_python\venv\Lib\site-packages </span><br></pre></td></tr></table></figure>
+
+<ol start="2">
+<li>使用一个简单构图<a target="_blank" rel="noopener" href="https://plotly.com/python/figure-structure/#overview">https://plotly.com/python/figure-structure/#overview</a></li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> plotly.express <span class="keyword">as</span> px</span><br><span class="line"></span><br><span class="line">fig = px.line(x=[<span class="string">&quot;原点&quot;</span>,<span class="string">&quot;峰值&quot;</span>,<span class="string">&quot;最后&quot;</span>], y=[<span class="number">0</span>,<span class="number">99</span>,<span class="number">50</span>], title=<span class="string">&quot;sample figure&quot;</span>)</span><br><span class="line"><span class="built_in">print</span>(fig)</span><br><span class="line">fig.show()</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://menge-bucket.oss-cn-beijing.aliyuncs.com/Note_img/image-20221020172405020.png" alt="image-20221020172405020"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://mengn1e.github.io">MengN1e</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://mengn1e.github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/">https://mengn1e.github.io/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://mengn1e.github.io" target="_blank">MengN1e の 小小世界</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/python/">python</a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a></div><div class="post_share"><div class="social-share" data-image="/post-images/hbm-K5f37.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/10/18/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E5%87%86%E5%A4%87/"><img class="next-cover" src="/post-images/hbm-K5f37.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">数据清洗与准备</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/09/20/NumPy%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%95%B0%E7%BB%84%E4%B8%8E%E5%90%91%E9%87%8F%E5%8C%96%E8%AE%A1%E7%AE%97/" title="NumPy基础：数组与向量化计算"><img class="cover" src="/post-images/numpy-ji-chu-shu-zu-yu-xiang-liang-hua-ji-suan.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-09-20</div><div class="title">NumPy基础：数组与向量化计算</div></div></a></div><div><a href="/2022/10/18/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E5%87%86%E5%A4%87/" title="数据清洗与准备"><img class="cover" src="/post-images/hbm-K5f37.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-18</div><div class="title">数据清洗与准备</div></div></a></div><div><a href="/2022/10/13/pandas%E5%9F%BA%E7%A1%80/" title="pandas基础"><img class="cover" src="/post-images/hbm-K5f37.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-13</div><div class="title">pandas基础</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="gitalk-container"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://menge-bucket.oss-cn-beijing.aliyuncs.com/Note_img/my.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">MengN1e</div><div class="author-info__description">萌蘖向阳成参天 ​​​</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">15</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">11</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/MengN1e"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/MengN1e" target="_blank" title="Github"><i class="fab fa-github"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">无人问津也好，技不如人也罢，你要试着安静下来，去做自己该做的事，而不是让内心烦躁、焦虑，毁掉你本就不多的热情和定力。 ​​​</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E5%87%86%E5%A4%87"><span class="toc-number">1.</span> <span class="toc-text">数据清洗和准备</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%A6%BB%E6%95%A3%E5%8C%96%E5%92%8C%E5%88%86%E7%AE%B1"><span class="toc-number">2.</span> <span class="toc-text">离散化和分箱</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A3%80%E6%B5%8B%E5%92%8C%E8%BF%87%E6%BB%A4%E5%BC%82%E5%B8%B8%E5%80%BC"><span class="toc-number">3.</span> <span class="toc-text">检测和过滤异常值</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BD%AE%E6%8D%A2%E5%92%8C%E9%9A%8F%E6%9C%BA%E6%8A%BD%E6%A0%B7"><span class="toc-number">4.</span> <span class="toc-text">置换和随机抽样</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%93%8D%E4%BD%9C"><span class="toc-number">5.</span> <span class="toc-text">字符串操作</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95"><span class="toc-number">5.1.</span> <span class="toc-text">字符串对象方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Pandas%E4%B8%AD%E7%9A%84%E5%90%91%E9%87%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%87%BD%E6%95%B0"><span class="toc-number">5.2.</span> <span class="toc-text">Pandas中的向量化字符串函数</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%98%E5%9B%BE%E5%92%8C%E5%8F%AF%E8%A7%86%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">绘图和可视化</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85matplotlib"><span class="toc-number">6.1.</span> <span class="toc-text">安装matplotlib</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#matplotloib-API%E5%85%A5%E9%97%A8"><span class="toc-number">6.2.</span> <span class="toc-text">matplotloib API入门</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8pandas%E5%92%8Cseaborn%E7%BB%98%E5%9B%BE"><span class="toc-number">6.3.</span> <span class="toc-text">使用pandas和seaborn绘图</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/" title="数据清洗和绘图入门"><img src="/post-images/hbm-K5f37.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据清洗和绘图入门"/></a><div class="content"><a class="title" href="/2022/10/20/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E5%92%8C%E7%BB%98%E5%9B%BE%E5%85%A5%E9%97%A8/" title="数据清洗和绘图入门">数据清洗和绘图入门</a><time datetime="2022-10-20T09:25:45.000Z" title="发表于 2022-10-20 17:25:45">2022-10-20</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/18/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E5%87%86%E5%A4%87/" title="数据清洗与准备"><img src="/post-images/hbm-K5f37.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="数据清洗与准备"/></a><div class="content"><a class="title" href="/2022/10/18/%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E4%B8%8E%E5%87%86%E5%A4%87/" title="数据清洗与准备">数据清洗与准备</a><time datetime="2022-10-18T08:00:53.000Z" title="发表于 2022-10-18 16:00:53">2022-10-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/13/pandas%E5%9F%BA%E7%A1%80/" title="pandas基础"><img src="/post-images/hbm-K5f37.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pandas基础"/></a><div class="content"><a class="title" href="/2022/10/13/pandas%E5%9F%BA%E7%A1%80/" title="pandas基础">pandas基础</a><time datetime="2022-10-13T09:54:20.000Z" title="发表于 2022-10-13 17:54:20">2022-10-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/29/Pandas%E5%85%A5%E9%97%A8/" title="Pandas入门"><img src="/post-images/hbm-K5f37.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Pandas入门"/></a><div class="content"><a class="title" href="/2022/09/29/Pandas%E5%85%A5%E9%97%A8/" title="Pandas入门">Pandas入门</a><time datetime="2022-09-29T09:52:33.000Z" title="发表于 2022-09-29 17:52:33">2022-09-29</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/20/NumPy%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%95%B0%E7%BB%84%E4%B8%8E%E5%90%91%E9%87%8F%E5%8C%96%E8%AE%A1%E7%AE%97/" title="NumPy基础：数组与向量化计算"><img src="/post-images/numpy-ji-chu-shu-zu-yu-xiang-liang-hua-ji-suan.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="NumPy基础：数组与向量化计算"/></a><div class="content"><a class="title" href="/2022/09/20/NumPy%E5%9F%BA%E7%A1%80%EF%BC%9A%E6%95%B0%E7%BB%84%E4%B8%8E%E5%90%91%E9%87%8F%E5%8C%96%E8%AE%A1%E7%AE%97/" title="NumPy基础：数组与向量化计算">NumPy基础：数组与向量化计算</a><time datetime="2022-09-20T08:29:03.000Z" title="发表于 2022-09-20 16:29:03">2022-09-20</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2022 By MengN1e</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><script>var preloader = {
+  endLoading: () => {
+    document.body.style.overflow = 'auto';
+    document.getElementById('loading-box').classList.add("loaded")
+  },
+  initLoading: () => {
+    document.body.style.overflow = '';
+    document.getElementById('loading-box').classList.remove("loaded")
+
+  }
+}
+window.addEventListener('load',preloader.endLoading())</script><div class="js-pjax"><script>function addGitalkSource () {
+  const ele = document.createElement('link')
+  ele.rel = 'stylesheet'
+  ele.href= 'https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css'
+  document.getElementsByTagName('head')[0].appendChild(ele)
+}
+
+function loadGitalk () {
+  function initGitalk () {
+    var gitalk = new Gitalk(Object.assign({
+      clientID: '35bb885ff186bbb7b1d8',
+      clientSecret: '02273501529ad60113b875156b35fd603cf8074b',
+      repo: 'MengN1e.github.io',
+      owner: 'MengN1e',
+      admin: ['MengN1e'],
+      id: '1510b26dbd91d8b8af13e22a8f0f6d8d',
+      updateCountCallback: commentCount
+    },null))
+
+    gitalk.render('gitalk-container')
+  }
+
+  if (typeof Gitalk === 'function') initGitalk()
+  else {
+    addGitalkSource()
+    getScript('https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js').then(initGitalk)
+  }
+}
+
+function commentCount(n){
+  let isCommentCount = document.querySelector('#post-meta .gitalk-comment-count')
+  if (isCommentCount) {
+    isCommentCount.innerHTML= n
+  }
+}
+
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+  else loadGitalk()
+} else {
+  function loadOtherComment () {
+    loadGitalk()
+  }
+}</script></div><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-show-text.min.js" data-mobile="false" data-text="sakana~,(๑‾ ꇴ ‾๑),վ'ᴗ' ի,(๑&gt;؂&lt;๑）,ᶘ ᵒᴥᵒᶅ,(*&gt;.&lt;*)~" data-fontsize="16px" data-random="false" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
